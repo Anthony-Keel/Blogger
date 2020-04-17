@@ -12,14 +12,14 @@ namespace Blogger.WebUI.App_Start
     using Ninject.Web.Common;
     using Ninject.Web.Common.WebHost;
 
-    public static class NinjectWebCommon 
+    public static class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application.
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
@@ -61,6 +61,7 @@ namespace Blogger.WebUI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            System.Web.Mvc.DependencyResolver.SetResolver(new Blogger.WebUI.Infrastructure.NinjectDependencyResolver(kernel));
         }
     }
 }
